@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>TIC</title>
+    <link rel="stylesheet" href="static/code/lib/codemirror.css"/>
+    <link rel="stylesheet" href="static/code/theme/base16-dark.css"/>
+    <link rel="stylesheet" href="static/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/component.css"/>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+<div class="hd">
+    <h1 class="title">TIC Receiver</h1>
+    <span class="input input--isao"> <input value="http://xss1.com:8080/receiver" class="input__field input__field--isao" type="text" id="input-39" onkeydown="EnterPress()"/> 
+   	 <label class="input__label input__label--isao" for="input-39" data-content="URL"> 
+           <span class="input__label-content input__label-content--isao">Receive URL</span> 
+      </label> 
+    </span>
+   <textarea id="code" name="code" style="display:none"> 
+
+   </textarea>
+</div>
+<script src="static/code/lib/codemirror.js"></script>
+<script src="static/code/mode/javascript/javascript.js"></script>
+<script src="static/code/addon/selection/active-line.js"></script>
+<script src="static/code/addon/edit/matchbrackets.js"></script>
+<script src="static/jquery-1.9.1.min.js"></script>
+<script src="static/js/classie.js"></script>
+<script>
+    function EnterPress(e){
+        var e = e || window.event; 
+        if(e.keyCode == 13){ 
+            $.get(String(document.getElementById('input-39').value),function(callback){
+                var jsonStr = JSON.stringify(callback);
+                var res = "";
+                for (var i = 0, j = 0, k = 0, ii, ele; i < jsonStr.length; i++) { //k:缩进，j:""个数
+                    ele = jsonStr.charAt(i);
+                    if (j % 2 == 0 && ele == "}") {
+                        k--;
+                        for (ii = 0; ii < k; ii++) ele = "    " + ele;
+                        ele = "\n" + ele;
+                    } else if (j % 2 == 0 && ele == "{") {
+                        ele += "\n";
+                        k++;
+                        for (ii = 0; ii < k; ii++) ele += "    ";
+                    } else if (j % 2 == 0 && ele == ",") {
+                        ele += "\n";
+                        for (ii = 0; ii < k; ii++) ele += "    ";
+                    } else if (ele == "\"") j++;
+                    res += ele;
+                }
+                $("#code").text(res);
+                var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+                    lineNumbers: true,
+                    styleActiveLine: true,
+                    matchBrackets: true,
+                    smartIndent: true,
+                    autoCloseBrackets: true,
+                    mode: "application/ld+json",
+                    lineWrapping: true
+                });
+                editor.setOption("theme", "base16-dark");
+                //设置宽和高
+                editor.setSize(900, 600);
+            })
+        }
+    } 
+</script>
+<script>
+    (function () {
+        if (!String.prototype.trim) {
+            (function () {
+                // Make sure we trim BOM and NBSP
+                var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                String.prototype.trim = function () {
+                    return this.replace(rtrim, '');
+                };
+            })();
+        }
+
+        [].slice.call(document.querySelectorAll('input.input__field')).forEach(function (inputEl) {
+            // in case the input is already filled..
+            if (inputEl.value.trim() !== '') {
+                classie.add(inputEl.parentNode, 'input--filled');
+            }
+
+            // events:
+            inputEl.addEventListener('focus', onInputFocus);
+            inputEl.addEventListener('blur', onInputBlur);
+        });
+
+        function onInputFocus(ev) {
+            classie.add(ev.target.parentNode, 'input--filled');
+        }
+
+        function onInputBlur(ev) {
+            if (ev.target.value.trim() === '') {
+                classie.remove(ev.target.parentNode, 'input--filled');
+            }
+        }
+    })();
+</script>
+</body>
+</html>

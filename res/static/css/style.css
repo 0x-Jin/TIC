@@ -1,0 +1,17 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #1F1F1F;
+}
+.hd{
+    width: 900px;
+    height: 100%;
+    margin: auto;
+}
+.title{
+    color: #fff;
+    float: left;
+}
+.input--isao{
+    float: right;   
+}
