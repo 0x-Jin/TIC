@@ -44,7 +44,21 @@ example:http://xxxx:8080/?url=baidu.com&cookie=PHPSESSION%3Dxxxxxxx&ip=127.0.0.1
 7.结果分为两大部分,第一部分为header,第二部分为request
 ```
 header中存储的内容是程序获得到的请求者的数据,user-agent referer 源IP  
-request中存储的内容为请求过来的数据 比如页面地址,cookie,ip等.
+request中存储的内容为请求过来的数据 比如页面地址,cookie,ip等.  
+  
+example:  
+ {
+        "header":{
+            "useragent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2478.0 Safari/537.36",
+            "referer":"http://zone.wooyun.org/",
+            "srcip":"::1"
+        },
+        "time":"2015/8/13 13:13:40",
+        "request":{
+            "url":"www.xss1.com",
+            "referer":"www.wooyun.org"
+        }
+    }
 ```
 
   
