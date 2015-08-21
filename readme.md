@@ -9,7 +9,7 @@ TIC,一个简单的XSS服务端. 0x_Jin
 
 #### 操作流程
 
-1.安装mongodb后需要最好开启mongodb的ip绑定,绑定到127.0.0.1
+1.安装mongodb后需要最好开启mongodb的ip绑定,绑定到127.0.0.1  
 2.安装完后启动mongodb 使用mongo命令来管理mongodb. 添加数据库账户.   
 ```
 use TIC  
