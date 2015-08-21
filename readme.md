@@ -11,10 +11,12 @@ TIC,一个简单的XSS服务端. 0x_Jin
 
 1. 安装mongodb后需要最好开启mongodb的ip绑定,绑定到127.0.0.1
 2. 安装完后启动mongodb 使用mongo命令来管理mongodb. 添加数据库账户.   
->use TIC  
+```
+use TIC  
 db.addUser('TIC','ThisIsPass')  
 如果你不想使用这个账号密码,可以更改为其他的.但是请同时修改TIC.js中的这段代码.  
 mongoose.connect('mongodb://TIC:ThisIsTIC@localhost/TIC');
+```
 3. 进入TIC目录,启动TIC.js (iojs TIC.js) , 程序会运行在本地的8080端口
 >如果需要修改端口,可以找到下面这段代码,把8080修改成你想要变更的端口.  
 http.createServer(server).listen(8080);
