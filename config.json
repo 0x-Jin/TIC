@@ -1,0 +1,15 @@
+{
+  	"port":8888,
+	"db":{
+		"dbname":"TIC",
+		"address":"localhost",
+		"username":"TIC",
+    	"password":"ThisIsTIC"
+	},
+  	"auth":{
+	  "username":"0x_Jin",
+	  "password":"wooyun",
+	  "Basic_realm":"0x_Jin xss1.com"
+	}
+}
+
